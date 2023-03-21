@@ -14,11 +14,19 @@ public class jdbcNew {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con=DriverManager.getConnection("jdbc:mysql://localhost/Anjali","root","root");
 				System.out.println("connection sucessfull");
-				Statement st=con.createStatement();
-				ResultSet rs=st.executeQuery("select * from student");
-				while(rs.next()) {
-					System.out.println(rs.getString("name")+" "+rs.getInt("rollno")+" "+rs.getInt("marks"));
+				String stmt="Create table stu(name varchar(20),roll int)";
+				Statement ss=con.createStatement();
+				
+				boolean ans=ss.execute(stmt);
+				
+				if(!ans) {
+					System.out.println("done table creation");
 				}
+				else {
+					System.out.println("oops");
+				}
+				
+				con.close();
 			} catch (ClassNotFoundException e) {
 
 				e.printStackTrace();
